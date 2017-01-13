@@ -1,20 +1,23 @@
 package com.example.suli690.myandfix;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.tbruyelle.rxpermissions.RxPermissions;
 
+import org.w3c.dom.Text;
+
 import rx.functions.Action1;
 
 public class MainActivity extends AppCompatActivity {
+    private final static String TAG =  MainActivity.class.getSimpleName();
 
     private EditText etAppVersion;
 
@@ -34,24 +37,19 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_load_patch).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    rxPermissions
-                            .request(Manifest.permission.READ_EXTERNAL_STORAGE)
-                            .subscribe(new Action1<Boolean>() {
-                                @Override
-                                public void call(Boolean granted) {
-                                    if (granted) {
-                                        addPatch();
+                rxPermissions
+                        .request(Manifest.permission.READ_EXTERNAL_STORAGE)
+                        .subscribe(new Action1<Boolean>() {
+                            @Override
+                            public void call(Boolean granted) {
+                                if (granted) {
+                                    addPatch();
 
-                                    } else {
-                                        Toast.makeText(getBaseContext(), "Require read storage permission!", Toast.LENGTH_LONG).show();
-                                    }
+                                } else {
+                                    Toast.makeText(getBaseContext(), "Require read storage permission!", Toast.LENGTH_LONG).show();
                                 }
-                            });
-//                } else {
-//                    addPatch();
-//                }
-
+                            }
+                        });
 
             }
         });
@@ -69,6 +67,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 //                printTest();
                 showToast();
+            }
+        });
+
+        findViewById(R.id.btn_print_system_info).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                printSystemInfo();
             }
         });
     }
@@ -93,6 +98,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showToast() {
-        Toast.makeText(this, "MainActivity private class fixed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "MainActivity private class", Toast.LENGTH_SHORT).show();
+
+        Test test = new Test();
+        test.printHotFixTest();
+    }
+
+
+    private void printSystemInfo() {
+        Log.i(TAG, "Model:" + Build.MODEL);
+        Log.i(TAG, "Brand:" + Build.BRAND);
+        Log.i(TAG, "Product:" + Build.PRODUCT);
+        Log.i(TAG, "Device:" + Build.DEVICE);
+        Log.i(TAG, "Display:" + Build.DISPLAY);
+        Log.i(TAG, "Host:" + Build.HOST);
     }
 }
