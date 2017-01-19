@@ -14,7 +14,7 @@ android {
 
     signingConfigs {
         debug {
-            storeFile rootProject.file("debug.jks")
+            storeFile rootProject.file("key/debug.jks")
             storePassword "123456"
             keyAlias "debug"
             keyPassword "123456"
@@ -39,6 +39,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFile = new File("./key/" + output.outputFile.name)
+        }
+
     }
 }
 
