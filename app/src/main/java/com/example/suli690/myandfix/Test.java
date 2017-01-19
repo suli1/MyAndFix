@@ -24,27 +24,27 @@ public class Test {
     private final static String FINAL_STRING = "常量";
 
     public void functionPublic() {
-        HotFixUtil.logJavaClass("public function");
+        HotFixUtil.logJavaClass("public function 2");
     }
 
     protected void functionProtected() {
-        HotFixUtil.logJavaClass("protected function");
+        HotFixUtil.logJavaClass("protected function 2");
     }
 
     private void functionPrivate() {
-        HotFixUtil.logJavaClass("private function");
+        HotFixUtil.logJavaClass("private function 2");
     }
 
     public static void functionStaticPublic() {
-        HotFixUtil.logJavaClass("static public function");
+        HotFixUtil.logJavaClass("static public function 2");
     }
 
     protected static void functionStaticProtected() {
-        HotFixUtil.logJavaClass("static protected function");
+        HotFixUtil.logJavaClass("static protected function 2");
     }
 
     private static void functionStaticPrivate() {
-        HotFixUtil.logJavaClass("static private function");
+        HotFixUtil.logJavaClass("static private function 2");
     }
 
     private class InnerClass {
@@ -56,15 +56,15 @@ public class Test {
         }
 
         public void functionPublic() {
-            HotFixUtil.logJavaClass("inner class public function");
+            HotFixUtil.logJavaClass("inner class public function 2");
         }
 
         protected void functionProtected() {
-            HotFixUtil.logJavaClass("inner class protected function");
+            HotFixUtil.logJavaClass("inner class protected function 2");
         }
 
         private void functionPrivate() {
-            HotFixUtil.logJavaClass("inner class private function");
+            HotFixUtil.logJavaClass("inner class private function 2");
         }
     }
 

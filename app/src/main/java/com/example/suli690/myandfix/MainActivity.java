@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tbruyelle.rxpermissions.RxPermissions;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private final static String TAG =  MainActivity.class.getSimpleName();
 
     private EditText etAppVersion;
+    private TextView tvSystemInfo;
 
     private RxPermissions rxPermissions;
 
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         rxPermissions = new RxPermissions(this);
 
         etAppVersion = (EditText) findViewById(R.id.et_app_version);
+
+        tvSystemInfo = (TextView) findViewById(R.id.tv_system_info);
 
 
         findViewById(R.id.btn_load_patch).setOnClickListener(new View.OnClickListener() {
@@ -65,17 +69,11 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_toast).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                printTest();
                 showToast();
             }
         });
 
-        findViewById(R.id.btn_print_system_info).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                printSystemInfo();
-            }
-        });
+        printSystemInfo();
     }
 
     private void addPatch() {
@@ -93,11 +91,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void printTest() {
-        showToast();
-    }
-
-    public void showToast() {
+    private void showToast() {
         Toast.makeText(this, "MainActivity private class", Toast.LENGTH_SHORT).show();
 
         Test test = new Test();
@@ -106,11 +100,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void printSystemInfo() {
-        Log.i(TAG, "Model:" + Build.MODEL);
-        Log.i(TAG, "Brand:" + Build.BRAND);
-        Log.i(TAG, "Product:" + Build.PRODUCT);
-        Log.i(TAG, "Device:" + Build.DEVICE);
-        Log.i(TAG, "Display:" + Build.DISPLAY);
-        Log.i(TAG, "Host:" + Build.HOST);
+        String info = "Model:" + Build.MODEL
+                + "\nBrand:" + Build.BRAND
+                + "\nsdk:" + Build.VERSION.SDK_INT
+                + "\nProduct:" + Build.PRODUCT
+                + "\nDevice:" + Build.DEVICE
+                + "\nDisplay:" + Build.DISPLAY
+                + "\nHost:" + Build.HOST;
+        tvSystemInfo.setText(info);
     }
 }
